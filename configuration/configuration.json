@@ -1,5 +1,5 @@
 {
-	"db": "mongodb://localhost/facebookWatch",
+	"db": "mongodb://10.75.130.160/facebookWatch",
 	"facebook": {
 		"secret": "a7294f9da12c6d6cfaa104ba568b2610",
 		"consumer": "616167925081267",
