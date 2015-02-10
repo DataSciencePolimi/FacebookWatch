@@ -21,7 +21,7 @@ var saveData = function(id, data) {
 
   var likers = data.data;
   var count = data.summary.total_count;
-
+  debug(count);
   var handlePagination = function(next) {
 
     return FB.getAsync(next)
