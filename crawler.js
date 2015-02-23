@@ -22,19 +22,33 @@ var saveData = function(id, data) {
   var likers = data.data;
   var count = data.summary.total_count;
   debug(count);
+
   var handlePagination = function(next) {
 
     return FB.getAsync(next)
       .then(function(data) {
         likers = likers.concat(data.data);
-
-        return Promise.resolve();
+        debug('pagination');
+        if (data.next) {
+          return handlePagination(data.next);
+        }
       });
   };
 
-  if (data.paging && data.paging.next) {
-    var next = data.paging.next;
-    return handlePagination(next);
+  if (false) {
+    var next = data.next;
+    return handlePagination(next).then(function() {
+      var rawStats = {
+        facebookId: id,
+        likers: likers,
+        likes: count
+      };
+
+      var FacebookObject = mongoose.model('facebookObject');
+
+      return (new FacebookObject(rawStats)).saveAsync();
+    });
+
   } else {
 
     var rawStats = {
